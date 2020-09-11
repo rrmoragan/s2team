@@ -1,0 +1,42 @@
+
+Una vez descargados los archivos y creada la base de datos con sus respectivas tablas,
+deberá ser manejado de la siguiente form
+
+localhost/mi_carpeta/index.php				==> para el frontend
+localhost/mi_carpeta/admin/index.php		==> para el sistema administrativo
+
+todo el sistema cuenta con los siguientes apartados en backend
+	listados
+	altas
+	bajas
+	cambios
+
+para el front en solo cuenta con la precentación del menu
+
+==================================================================
+REFERENCIAS TECNICAS
+==================================================================
+
+este sistema requiere que se tenga una base de datod previamente creada con un usuario,
+la base de datos debe estar con la codificacion utf8_unicode_ci
+
+las tablas necesarias son:
+
+CREATE TABLE cntl_menu (
+  id int(11) NOT NULL,
+  url varchar(255) NOT NULL,
+  title varchar(255) NOT NULL,
+  id_parent int(11) NOT NULL,
+  description text NOT NULL,
+  fing int(11) NOT NULL,
+  activ tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE cntl_menu ADD PRIMARY KEY (id);
+ALTER TABLE cntl_menu MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+INSERT INTO cntl_menu (id, url, title, id_parent, description, fing, activ) VALUES
+(1, '/', 'raiz', 1, 'raiz', 0, 1)
+
+esta tabla debe contener el primer registro para que tenga un funcionamiento adecuado
+
