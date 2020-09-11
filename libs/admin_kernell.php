@@ -238,27 +238,6 @@ class xSystem{
 
 		return $d;
 	}
-	/* validando la existencia de la url editada */
-	private function valid_edit_url($s='',$id=0){
-		if($s==''){ return 0; }
-		if($id==0){ return 0; }
-
-		$s = "SELECT * FROM cntl_menu WHERE url like '$s' and activ = 1";
-		$a = query($s);
-
-		/* no existe la url */
-		if( $a==null ){ return true; }
-		
-		/* si existe la url */
-		/* y es del mismo registro, no hubo cambios */
-		if( $id == $a[0]['id'] ){
-			return true;
-		}
-
-		/* si existe la url */
-		/* y es de otro registro */
-		return false;
-	}
 
 	/* BAJAS */
 
@@ -377,6 +356,7 @@ class xSystem{
 		}
 
 		$s = "SELECT * FROM cntl_menu WHERE url like '$s' and activ = 1";
+
 		$db = new dbase();
 		$a = $db->select( $s );
 
@@ -391,6 +371,30 @@ class xSystem{
 		}
 
 		return true;
+	}
+
+	/* validando la existencia de la url editada */
+	private function valid_edit_url($s='',$id=0){
+		if($s==''){ return 0; }
+		if($id==0){ return 0; }
+
+		$s = "SELECT * FROM cntl_menu WHERE url like '$s' and activ = 1";
+
+		$db = new dbase();
+		$a = $db->select( $s );
+
+		/* no existe la url */
+		if( $a==null ){ return true; }
+		
+		/* si existe la url */
+		/* y es del mismo registro, no hubo cambios */
+		if( $id == $a[0]['id'] ){
+			return true;
+		}
+
+		/* si existe la url */
+		/* y es de otro registro */
+		return false;
 	}
 }
 
