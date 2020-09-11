@@ -169,29 +169,6 @@ class xSystem{
 
 		return $d;
 	}
-	/* validando si ya existe la url */
-	public function is_url($s=''){
-
-		if($s==''){
-			$this->error[] = "url, faltan datos";
-			return false;
-		}
-
-		$s = "SELECT * FROM cntl_menu WHERE url like '$s' and activ = 1";
-		$a = query($s);
-
-		if( $a==null ){
-			$this->error[] = 'url, no existe';
-			return false;
-		}
-
-		if( count($a)>1 ){
-			$this->error[] = 'base de datos corrupta';
-			return false;
-		}
-
-		return true;
-	}
 
 
 	/* CAMBIOS */
@@ -389,6 +366,31 @@ class xSystem{
 		}
 
 		return $b;
+	}
+
+	/* validando si ya existe la url */
+	public function is_url($s=''){
+
+		if($s==''){
+			$this->error[] = "url, faltan datos";
+			return false;
+		}
+
+		$s = "SELECT * FROM cntl_menu WHERE url like '$s' and activ = 1";
+		$db = new dbase();
+		$a = $db->select( $s );
+
+		if( $a==null ){
+			$this->error[] = 'url, no existe';
+			return false;
+		}
+
+		if( count($a)>1 ){
+			$this->error[] = 'base de datos corrupta';
+			return false;
+		}
+
+		return true;
 	}
 }
 
